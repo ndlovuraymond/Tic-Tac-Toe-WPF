@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tic_Tac_Toe_WPF"
         mc:Ignorable="d"
-        Title="Multiplayer Tic Tac Toe" Height="600" Width="800">
+        Title="mygamewindow" Height="600" Width="800">
     <Grid Background="Black">
         <Label Content="Tic Tac Toe" Foreground="White" FontSize="85" HorizontalAlignment="Center" ></Label>
-        <Grid Width="350" Height="350" VerticalAlignment="Center" ShowGridLines="False" HorizontalAlignment="Center" Background="Black">
+        <Grid Name="mygamegrid" Width="350" Height="350" VerticalAlignment="Center" ShowGridLines="False" HorizontalAlignment="Center" Background="Black">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" ></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -39,9 +39,16 @@
                Foreground="White" Click="btn9_Click"></Button>
         </Grid>
         <Grid Width="600" Height="100" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-            <Label Name="Gamestatelabel" HorizontalAlignment="Center" FontSize="25" Foreground="White"></Label>
+            <Label Name="Gamestatelabel" HorizontalAlignment="Center" FontSize="20" Foreground="White"></Label>
             <Button Name="Restart" Content="Restart" Background="White" Foreground="Black" FontSize="20" HorizontalAlignment="Center"
-                    Width="100" Height="30" Margin="248,47,235,20" Click="Restart_Click"></Button>
+                    Width="100" Height="30" Margin="130,47,235,20" Click="Restart_Click"></Button>
+            <Button x:Name="MainMenu" Content="Menu" HorizontalAlignment="Left" Height="30" FontSize="20"
+                VerticalAlignment="Top" Width="100" Background="White" Margin="310,48.5,0,0" Click="MainMenu_Click"/>
         </Grid>
+        <Button x:Name="SinglePlayer" Content="Single Player Game" FontSize="40" HorizontalAlignment="Left" Margin="221,160,0,0" VerticalAlignment="Top" Width="350" Height="68" Click="SinglePlayer_Click"/>
+        <Button x:Name="MultiplayerGame" Content="Multiplayer" FontSize="40" HorizontalAlignment="Left" Margin="221,273,0,0" VerticalAlignment="Top" Width="350" Height="68" Click="MultiplayerGame_Click"/>
+        <Button x:Name="Score" Content="Score" HorizontalAlignment="Left" FontSize="40" Margin="221,391,0,0" VerticalAlignment="Top" Width="350" Height="68" Click="Score_Click"/>
+        <TextBlock Name="mytblock" Foreground="White" HorizontalAlignment="Center" Margin="96,110,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="349" Width="605" 
+                  FontSize="25" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </Window>

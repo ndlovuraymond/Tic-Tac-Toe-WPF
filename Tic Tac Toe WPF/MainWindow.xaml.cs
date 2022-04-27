@@ -20,14 +20,526 @@ namespace Tic_Tac_Toe_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        int counter=1;
+        bool Artificialintelligence = false;
+        int counter = 1;
         string move;
-
+        int multiplayerx = 0;
+        int multiplayero = 0;
+        int userwin = 0;
+        int aiwin = 0;
+        int drawsvsai = 0;
+        int drawsvsuser = 0;
         public MainWindow()
         {
             InitializeComponent();
+            gamegridhide();
+            tblockhide();
+          
+        }
+        public void tblockhide()
+        {
+            mytblock.Height = 0;
+            mytblock.Width = 0;
+        }
+        public void myAILogic()
+        {
+            if (counter % 2 == 0)
+                move = "O";
+            else
+                move = "X";
+            if (Artificialintelligence && counter<9)
+            {
+                switch (counter)
+                {
+                    case 2:
+                        if (btn5.Content.ToString() == "")
+                        {
+                            btn5.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else
+                        {
+                            var rand = new Random();
+                            int play = rand.Next(0, 5);
+                            if (play == 1)
+                                btn1.Content = move;
+                            else if (play == 2)
+                                btn3.Content = move;
+                            else if (play == 3)
+                                btn7.Content = move;
+                            else
+                                btn9.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                    case 4:
+                        if (btn5.Content.ToString() == "X" && btn9.Content.ToString() == "X" &&
+                            btn1.Content.ToString() == "" || btn4.Content.ToString() == "X" && btn7.Content.ToString() == "X"
+                            && btn1.Content.ToString() == "" || btn2.Content.ToString() == "X" && btn3.Content.ToString() == "X"
+                            && btn1.Content.ToString() == "")
+                        {
+                            btn1.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn1.Content.ToString() == "X" && btn3.Content.ToString() == "X" && btn2.Content.ToString() == ""
+                            || btn5.Content.ToString() == "X" && btn8.Content.ToString() == "X" && btn2.Content.ToString() == "")
+                        {
+                            btn2.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn7.Content.ToString() == "X" &&
+                            btn3.Content.ToString() == "" || btn1.Content.ToString() == "X" && btn2.Content.ToString() == "X"
+                            && btn3.Content.ToString() == "" || btn6.Content.ToString() == "X" && btn9.Content.ToString() == "X"
+                            && btn3.Content.ToString() == "")
+                        {
+                            btn3.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn6.Content.ToString() == "X" && btn4.Content.ToString() == ""
+                            || btn1.Content.ToString() == "X" && btn7.Content.ToString() == "X" && btn4.Content.ToString() == "")
+                        {
+                            btn4.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "X" && btn5.Content.ToString() == "X" && btn6.Content.ToString() == ""
+                            || btn3.Content.ToString() == "X" && btn9.Content.ToString() == "X" && btn6.Content.ToString() == "")
+                        {
+                            btn6.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "X" && btn1.Content.ToString() == "X" &&
+                            btn7.Content.ToString() == "" || btn5.Content.ToString() == "X" && btn3.Content.ToString() == "X"
+                            && btn7.Content.ToString() == "" || btn8.Content.ToString() == "X" && btn9.Content.ToString() == "X"
+                            && btn7.Content.ToString() == "")
+                        {
+                            btn7.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn3.Content.ToString() == "X" && btn6.Content.ToString() == "X" &&
+                            btn9.Content.ToString() == "" || btn1.Content.ToString() == "X" && btn5.Content.ToString() == "X"
+                            && btn9.Content.ToString() == "" || btn7.Content.ToString() == "X" && btn8.Content.ToString() == "X"
+                            && btn9.Content.ToString() == "")
+                        {
+                            btn9.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn2.Content.ToString() == "X" && btn8.Content.ToString() == ""
+                           || btn7.Content.ToString() == "X" && btn9.Content.ToString() == "X" && btn8.Content.ToString() == "")
+                        {
+                            btn8.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                        else
+                        {
+                            if (btn1.Content.ToString() == "") btn1.Content = move;
+                            else if (btn2.Content.ToString() == "") btn2.Content = move;
+                            else if (btn3.Content.ToString() == "") btn3.Content = move;
+                            else if (btn4.Content.ToString() == "") btn4.Content = move;
+                            else if (btn5.Content.ToString() == "") btn5.Content = move;
+                            else if (btn6.Content.ToString() == "") btn6.Content = move;
+                            else if (btn7.Content.ToString() == "") btn7.Content = move;
+                            else if (btn8.Content.ToString() == "") btn8.Content = move;
+                            else btn9.Content = move;
+                            counter++;
+                            label();
+                            break;
+                        }
+                    case 6:
+                        if (btn5.Content.ToString() == "O" && btn9.Content.ToString() == "O" &&
+                            btn1.Content.ToString() == "" || btn4.Content.ToString() == "O" && btn7.Content.ToString() == "O"
+                            && btn1.Content.ToString() == "" || btn2.Content.ToString() == "O" && btn3.Content.ToString() == "O"
+                            && btn1.Content.ToString() == "")
+                        {
+                            btn1.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn1.Content.ToString() == "O" && btn3.Content.ToString() == "O" && btn2.Content.ToString() == ""
+                            || btn5.Content.ToString() == "O" && btn8.Content.ToString() == "O" && btn2.Content.ToString() == "")
+                        {
+                            btn2.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "O" && btn7.Content.ToString() == "O" &&
+                            btn3.Content.ToString() == "" || btn1.Content.ToString() == "O" && btn2.Content.ToString() == "O"
+                            && btn3.Content.ToString() == "" || btn6.Content.ToString() == "O" && btn9.Content.ToString() == "O"
+                            && btn3.Content.ToString() == "")
+                        {
+                            btn3.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "O" && btn6.Content.ToString() == "O" && btn4.Content.ToString() == ""
+                            || btn1.Content.ToString() == "O" && btn7.Content.ToString() == "O" && btn4.Content.ToString() == "")
+                        {
+                            btn4.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "O" && btn5.Content.ToString() == "O" && btn6.Content.ToString() == ""
+                            || btn3.Content.ToString() == "O" && btn9.Content.ToString() == "O" && btn6.Content.ToString() == "")
+                        {
+                            btn6.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "O" && btn1.Content.ToString() == "O" &&
+                            btn7.Content.ToString() == "" || btn5.Content.ToString() == "O" && btn3.Content.ToString() == "O"
+                            && btn7.Content.ToString() == "" || btn8.Content.ToString() == "O" && btn9.Content.ToString() == "O"
+                            && btn7.Content.ToString() == "")
+                        {
+                            btn7.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn3.Content.ToString() == "O" && btn6.Content.ToString() == "O" &&
+                            btn9.Content.ToString() == "" || btn1.Content.ToString() == "O" && btn5.Content.ToString() == "O"
+                            && btn9.Content.ToString() == "" || btn7.Content.ToString() == "O" && btn8.Content.ToString() == "O"
+                            && btn9.Content.ToString() == "")
+                        {
+                            btn9.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "O" && btn2.Content.ToString() == "O" && btn8.Content.ToString() == ""
+                           || btn7.Content.ToString() == "O" && btn9.Content.ToString() == "O" && btn8.Content.ToString() == "")
+                        {
+                            btn8.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn9.Content.ToString() == "X" &&
+                            btn1.Content.ToString() == "" || btn4.Content.ToString() == "X" && btn7.Content.ToString() == "X"
+                            && btn1.Content.ToString() == "" || btn2.Content.ToString() == "X" && btn3.Content.ToString() == "X"
+                            && btn1.Content.ToString() == "")
+                        {
+                            btn1.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn1.Content.ToString() == "X" && btn3.Content.ToString() == "X" && btn2.Content.ToString() == ""
+                            || btn5.Content.ToString() == "X" && btn8.Content.ToString() == "X" && btn2.Content.ToString() == "")
+                        {
+                            btn2.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn7.Content.ToString() == "X" &&
+                            btn3.Content.ToString() == "" || btn1.Content.ToString() == "X" && btn2.Content.ToString() == "X"
+                            && btn3.Content.ToString() == "" || btn6.Content.ToString() == "X" && btn9.Content.ToString() == "X"
+                            && btn3.Content.ToString() == "")
+                        {
+                            btn3.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn6.Content.ToString() == "X" && btn4.Content.ToString() == ""
+                            || btn1.Content.ToString() == "X" && btn7.Content.ToString() == "X" && btn4.Content.ToString() == "")
+                        {
+                            btn4.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "X" && btn5.Content.ToString() == "X" && btn6.Content.ToString() == ""
+                            || btn3.Content.ToString() == "X" && btn9.Content.ToString() == "X" && btn6.Content.ToString() == "")
+                        {
+                            btn6.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "X" && btn1.Content.ToString() == "X" &&
+                            btn7.Content.ToString() == "" || btn5.Content.ToString() == "X" && btn3.Content.ToString() == "X"
+                            && btn7.Content.ToString() == "" || btn8.Content.ToString() == "X" && btn9.Content.ToString() == "X"
+                            && btn7.Content.ToString() == "")
+                        {
+                            btn7.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn3.Content.ToString() == "X" && btn6.Content.ToString() == "X" &&
+                            btn9.Content.ToString() == "" || btn1.Content.ToString() == "X" && btn5.Content.ToString() == "X"
+                            && btn9.Content.ToString() == "" || btn7.Content.ToString() == "X" && btn8.Content.ToString() == "X"
+                            && btn9.Content.ToString() == "")
+                        {
+                            btn9.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn2.Content.ToString() == "X" && btn8.Content.ToString() == ""
+                           || btn7.Content.ToString() == "X" && btn9.Content.ToString() == "X" && btn8.Content.ToString() == "")
+                        {
+                            btn8.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else
+                        {
+                            if (btn1.Content.ToString() == "") btn1.Content = move;
+                            else if (btn2.Content.ToString() == "") btn2.Content = move;
+                            else if (btn3.Content.ToString() == "") btn3.Content = move;
+                            else if (btn4.Content.ToString() == "") btn4.Content = move;
+                            else if (btn5.Content.ToString() == "") btn5.Content = move;
+                            else if (btn6.Content.ToString() == "") btn6.Content = move;
+                            else if (btn7.Content.ToString() == "") btn7.Content = move;
+                            else if (btn8.Content.ToString() == "") btn8.Content = move;
+                            else btn9.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                    case 8:
+                        if (btn5.Content.ToString() == "O" && btn9.Content.ToString() == "O" &&
+                            btn1.Content.ToString() == "" || btn4.Content.ToString() == "O" && btn7.Content.ToString() == "O"
+                            && btn1.Content.ToString() == "" || btn2.Content.ToString() == "O" && btn3.Content.ToString() == "O"
+                            && btn1.Content.ToString() == "")
+                        {
+                            btn1.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn1.Content.ToString() == "O" && btn3.Content.ToString() == "O" && btn2.Content.ToString() == ""
+                            || btn5.Content.ToString() == "O" && btn8.Content.ToString() == "O" && btn2.Content.ToString() == "")
+                        {
+                            btn2.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "O" && btn7.Content.ToString() == "O" &&
+                            btn3.Content.ToString() == "" || btn1.Content.ToString() == "O" && btn2.Content.ToString() == "O"
+                            && btn3.Content.ToString() == "" || btn6.Content.ToString() == "O" && btn9.Content.ToString() == "O"
+                            && btn3.Content.ToString() == "")
+                        {
+                            btn3.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "O" && btn6.Content.ToString() == "O" && btn4.Content.ToString() == ""
+                            || btn1.Content.ToString() == "O" && btn7.Content.ToString() == "O" && btn4.Content.ToString() == "")
+                        {
+                            btn4.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "O" && btn5.Content.ToString() == "O" && btn6.Content.ToString() == ""
+                            || btn3.Content.ToString() == "O" && btn9.Content.ToString() == "O" && btn6.Content.ToString() == "")
+                        {
+                            btn6.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "O" && btn1.Content.ToString() == "O" &&
+                            btn7.Content.ToString() == "" || btn5.Content.ToString() == "O" && btn3.Content.ToString() == "O"
+                            && btn7.Content.ToString() == "" || btn8.Content.ToString() == "O" && btn9.Content.ToString() == "O"
+                            && btn7.Content.ToString() == "")
+                        {
+                            btn7.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn3.Content.ToString() == "O" && btn6.Content.ToString() == "O" &&
+                            btn9.Content.ToString() == "" || btn1.Content.ToString() == "O" && btn5.Content.ToString() == "O"
+                            && btn9.Content.ToString() == "" || btn7.Content.ToString() == "O" && btn8.Content.ToString() == "O"
+                            && btn9.Content.ToString() == "")
+                        {
+                            btn9.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "O" && btn2.Content.ToString() == "O" && btn8.Content.ToString() == ""
+                           || btn7.Content.ToString() == "O" && btn9.Content.ToString() == "O" && btn8.Content.ToString() == "")
+                        {
+                            btn8.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn9.Content.ToString() == "X" &&
+                            btn1.Content.ToString() == "" || btn4.Content.ToString() == "X" && btn7.Content.ToString() == "X"
+                            && btn1.Content.ToString() == "" || btn2.Content.ToString() == "X" && btn3.Content.ToString() == "X"
+                            && btn1.Content.ToString() == "")
+                        {
+                            btn1.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn1.Content.ToString() == "X" && btn3.Content.ToString() == "X" && btn2.Content.ToString() == ""
+                            || btn5.Content.ToString() == "X" && btn8.Content.ToString() == "X" && btn2.Content.ToString() == "")
+                        {
+                            btn2.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn7.Content.ToString() == "X" &&
+                            btn3.Content.ToString() == "" || btn1.Content.ToString() == "X" && btn2.Content.ToString() == "X"
+                            && btn3.Content.ToString() == "" || btn6.Content.ToString() == "X" && btn9.Content.ToString() == "X"
+                            && btn3.Content.ToString() == "")
+                        {
+                            btn3.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn6.Content.ToString() == "X" && btn4.Content.ToString() == ""
+                            || btn1.Content.ToString() == "X" && btn7.Content.ToString() == "X" && btn4.Content.ToString() == "")
+                        {
+                            btn4.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "X" && btn5.Content.ToString() == "X" && btn6.Content.ToString() == ""
+                            || btn3.Content.ToString() == "X" && btn9.Content.ToString() == "X" && btn6.Content.ToString() == "")
+                        {
+                            btn6.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn4.Content.ToString() == "X" && btn1.Content.ToString() == "X" &&
+                            btn7.Content.ToString() == "" || btn5.Content.ToString() == "X" && btn3.Content.ToString() == "X"
+                            && btn7.Content.ToString() == "" || btn8.Content.ToString() == "X" && btn9.Content.ToString() == "X"
+                            && btn7.Content.ToString() == "")
+                        {
+                            btn7.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn3.Content.ToString() == "X" && btn6.Content.ToString() == "X" &&
+                            btn9.Content.ToString() == "" || btn1.Content.ToString() == "X" && btn5.Content.ToString() == "X"
+                            && btn9.Content.ToString() == "" || btn7.Content.ToString() == "X" && btn8.Content.ToString() == "X"
+                            && btn9.Content.ToString() == "")
+                        {
+                            btn9.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else if (btn5.Content.ToString() == "X" && btn2.Content.ToString() == "X" && btn8.Content.ToString() == ""
+                           || btn7.Content.ToString() == "X" && btn9.Content.ToString() == "X" && btn8.Content.ToString() == "")
+                        {
+                            btn8.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                        else
+                        {
+                            if (btn1.Content.ToString() == "") btn1.Content = move;
+                            else if (btn2.Content.ToString() == "") btn2.Content = move;
+                            else if (btn3.Content.ToString() == "") btn3.Content = move;
+                            else if (btn4.Content.ToString() == "") btn4.Content = move;
+                            else if (btn5.Content.ToString() == "") btn5.Content = move;
+                            else if (btn6.Content.ToString() == "") btn6.Content = move;
+                            else if (btn7.Content.ToString() == "") btn7.Content = move;
+                            else if (btn8.Content.ToString() == "") btn8.Content = move;
+                            else btn9.Content = move;
+                            counter++;
+                            label();
+                            GameResult();
+                            break;
+                        }
+                }
+            }
+        }
+        public void gamegridhide()
+        {
+            mygamegrid.Opacity = 0;
+            Restart.Opacity = 0;
+            MainMenu.Opacity = 0;
+        }
+        public void gamegridshow()
+        {
+            SinglePlayer.Width = 0;
+            SinglePlayer.Height = 0;
+            MultiplayerGame.Width = 0;
+            MultiplayerGame.Height = 0;
+            Score.Width = 0;
+            Score.Height = 0;
+            mygamegrid.Opacity = 100;
+            Restart.Opacity = 100;
+            MainMenu.Opacity = 100;
             label();
         }
+
         public void label()
         {
             if (counter % 2 == 0)
@@ -41,7 +553,7 @@ namespace Tic_Tac_Toe_WPF
         }
         private void GameResult()
         {
-            if(btn1.Content.ToString() != "" && btn1.Content == btn2.Content && btn2.Content == btn3.Content ||
+            if (btn1.Content.ToString() != "" && btn1.Content == btn2.Content && btn2.Content == btn3.Content ||
                 btn1.Content.ToString() != "" && btn1.Content == btn5.Content && btn5.Content == btn9.Content ||
                 btn1.Content.ToString() != "" && btn1.Content == btn4.Content && btn4.Content == btn7.Content ||
                 btn2.Content.ToString() != "" && btn5.Content == btn2.Content && btn2.Content == btn8.Content ||
@@ -64,12 +576,27 @@ namespace Tic_Tac_Toe_WPF
                     move = "O";
                 else
                     move = "X";
+                if (!Artificialintelligence)
+                {
+                    if (counter % 2 == 0) multiplayero += 1;
+                    else multiplayerx += 1;
+                }
+                else
+                {
+                    if (counter % 2 == 0) aiwin += 1;
+                    else userwin += 1;
+                }
                 Gamestatelabel.Content = $"{move} won the game,click restart to play another game";
+                counter = 9;
             }
-            else if(btn1.Content.ToString() != "" && btn2.Content.ToString() != "" && btn3.Content.ToString() != "" && btn4.Content.ToString() != "" &&
+            else if (btn1.Content.ToString() != "" && btn2.Content.ToString() != "" && btn3.Content.ToString() != "" && btn4.Content.ToString() != "" &&
                btn5.Content.ToString() != "" && btn5.Content.ToString() != "" && btn6.Content.ToString() != "" && btn7.Content.ToString() != "" &&
                btn8.Content.ToString() != "" && btn9.Content.ToString() != "")
+            {
+                if (Artificialintelligence) drawsvsai += 1;
+                else drawsvsuser += 1;
                 Gamestatelabel.Content = "Game ended in a tie, click restart to play another game";
+            }
         }
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
@@ -83,6 +610,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -100,6 +628,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -117,6 +646,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -134,6 +664,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -151,6 +682,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -168,6 +700,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -185,6 +718,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -202,6 +736,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -219,6 +754,7 @@ namespace Tic_Tac_Toe_WPF
                 counter++;
                 label();
                 GameResult();
+                myAILogic();
             }
             else
                 MessageBox.Show("Invalid move");
@@ -238,6 +774,62 @@ namespace Tic_Tac_Toe_WPF
             btn8.Content = "";
             btn9.Content = "";
             Gamestatelabel.Content = $"{move} is playing";
+        }
+
+        private void SinglePlayer_Click(object sender, RoutedEventArgs e)
+        {
+            Gamestatelabel.Opacity = 100;
+            gamegridshow();
+            Artificialintelligence = true;
+        }
+
+        private void MultiplayerGame_Click(object sender, RoutedEventArgs e)
+        {
+            Gamestatelabel.Opacity = 100;
+            gamegridshow();
+            Artificialintelligence = false;
+        }
+
+        private void Score_Click(object sender, RoutedEventArgs e)
+        {
+            SinglePlayer.Width = 0;
+            SinglePlayer.Height = 0;
+            MultiplayerGame.Width = 0;
+            MultiplayerGame.Height = 0;
+            Score.Width = 0;
+            Score.Height = 0;
+            mytblock.Width = 605;
+            mytblock.Height = 349;
+            mytblock.Text = "Games against computer \n" + $"Wins: {userwin} \n"
+                + $"Losses: {aiwin} \n" + $"Draws: {drawsvsai} \n" +
+                "Games against user \n" + $"X-Wins: {multiplayerx} \n"
+                + $"O-wins: {multiplayero} \n" + $"Draws: {drawsvsuser}";
+            MainMenu.Opacity = 100;
+        }
+
+        private void MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Gamestatelabel.Opacity = 0;
+            counter = 1;
+            move = "X";
+            btn1.Content = "";
+            btn2.Content = "";
+            btn3.Content = "";
+            btn4.Content = "";
+            btn5.Content = "";
+            btn6.Content = "";
+            btn7.Content = "";
+            btn8.Content = "";
+            btn9.Content = "";
+            Gamestatelabel.Content = $"{move} is playing";
+            gamegridhide();
+            tblockhide();
+            SinglePlayer.Width = 350;
+            SinglePlayer.Height = 68;
+            MultiplayerGame.Width = 350;
+            MultiplayerGame.Height = 68;
+            Score.Height = 68;
+            Score.Width = 350;
         }
     }
 }
